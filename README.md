@@ -1,5 +1,7 @@
 # healthkenya
 
+![Calver-YYYY.0M.0D.Minor](https://img.shields.io/badge/Version-2020.01.08.1-green)
+
 Data collected from [Kenya Master Health Facility List](http://kmhfl.health.go.ke)
 
 To get the api token
