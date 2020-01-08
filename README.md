@@ -1,6 +1,6 @@
 # healthkenya
 
-![Calver-YYYY.0M.0D.Minor](https://img.shields.io/badge/Version-2020.01.08.1-green)
+![Calver-YYYY.0M.0D.Minor](https://img.shields.io/badge/Last_Updated-08/Jan/2020-green)
 
 Data collected from [Kenya Master Health Facility List](http://kmhfl.health.go.ke)
 
