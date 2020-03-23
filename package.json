@@ -1,0 +1,18 @@
+{
+  "name": "healthkenya",
+  "private": true,
+  "scripts": {
+    "lint": "prettier --write health.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/puppeteer-core": "^2.0.0",
+    "chalk": "^3.0.0",
+    "node-fetch": "^2.6.0",
+    "prettier": "^2.0.1",
+    "puppeteer": "^2.1.1",
+    "puppeteer-core": "^2.1.1",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3"
+  }
+}
