@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 
-import counties from "../../data/dataset/counties.json";
+import summaries from "../../data/dataset/summaries.json";
 
 const Map = dynamic(() => import("../components/Map"), { ssr: false });
 
@@ -23,7 +23,7 @@ interface State {
 }
 
 const initialState = {
-  counties,
+  counties: summaries.county,
   selectedCounty: { name: "Nairobi" },
   facilities: [],
 };
@@ -41,12 +41,33 @@ function Index() {
       setState({ ...state, facilities: data.results });
     };
     fetchData();
+    return () => {};
   }, [state.selectedCounty.name]);
 
   const handleChange = (option) =>
     setState({ ...state, selectedCounty: option });
 
-  if (state.facilities.length > 2) {
+  const getMidCoordFromPoints = (points: { lat?: string; long?: string }[]) => {
+    //Get two points from point array with none NaN long or lat
+    const arr: { lat: number; long: number }[] = [];
+    let i = 0;
+    while (i < 3) {
+      const plong = Number.parseFloat(points[i].long);
+      const plat = Number.parseFloat(points[i].lat);
+      if (Number.isNaN(plat) || Number.isNaN(plong)) {
+        continue;
+      }
+      arr.push({ lat: plat, long: plong });
+      i++;
+    }
+    return arr.pop();
+  };
+
+  if (state.facilities.length) {
+    const { lat: midLat, long: midLong } = getMidCoordFromPoints(
+      state.facilities
+    );
+    console.log("Rendered");
     return (
       <main>
         <div className="flex">
@@ -54,23 +75,19 @@ function Index() {
             <Map
               width={"100%"}
               height={"100vh"}
-              latitude={-1.28333}
-              longitude={36.81667}
-              zoom={14}
+              latitude={midLong}
+              longitude={midLat}
+              zoom={13}
               markers={state.facilities}
             >
               <div
-                className="p-3"
                 style={{
                   position: "absolute",
-                  borderRadius: "6px",
-                  background: "white",
                   top: "20px",
                   left: "20px",
                   width: "200px",
                 }}
               >
-                <div className="font-medium">Countries</div>
                 <Select
                   value={state.selectedCounty}
                   onChange={handleChange}
@@ -78,7 +95,6 @@ function Index() {
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.name}
                 />
-                <span className="mt-2">Total: {state.facilities.length}</span>
               </div>
             </Map>
           </div>
