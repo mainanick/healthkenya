@@ -1,0 +1,14 @@
+/* purgecss start ignore */
+@tailwind base;
+
+@tailwind components;
+/* purgecss end ignore */
+
+@tailwind utilities;
+
+html {
+  font-family: "Open Sans", sans-serif;
+}
+body {
+  background-color: #ffffff;
+}

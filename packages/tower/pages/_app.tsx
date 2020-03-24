@@ -1,4 +1,5 @@
 import "mapbox-gl/dist/mapbox-gl.css";
+import "../components/styles.css";
 
 import Head from "next/head";
 import React from "react";

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import ReactMapGL, { Marker, NavigationControl } from "react-map-gl";
 
 interface Marker {
@@ -38,9 +38,7 @@ class Markers extends React.Component<{ data: Marker[] }> {
                 background: "red",
               }}
               onClick={() => console.log(d.name)}
-            >
-              {d.lat}
-            </div>
+            ></div>
           </Marker>
         );
       }
@@ -50,7 +48,7 @@ class Markers extends React.Component<{ data: Marker[] }> {
   }
 }
 
-function Map(props: MapProps) {
+function Map(props: React.PropsWithChildren<MapProps>) {
   const { markers, ...others } = props;
   const [viewport, setViewport] = useState(others);
   return (
@@ -66,6 +64,7 @@ function Map(props: MapProps) {
       <div style={{ position: "absolute", top: 20, right: 20 }}>
         <NavigationControl />
       </div>
+      {props.children}
     </ReactMapGL>
   );
 }
