@@ -5,7 +5,7 @@ import puppeteer from "puppeteer";
 
 (async () => {
   const counties: { id: string; name: string }[] = JSON.parse(
-    fs.readFileSync("dataset/counties.json", "utf8")
+    fs.readFileSync("./dataset/counties.json", "utf8")
   );
 
   async function getRequestHeaders() {
@@ -52,7 +52,7 @@ import puppeteer from "puppeteer";
   counties.map(async county => {
     const facilities: Array<any> = await request(county.id);
     fs.writeFile(
-      `dataset/county_facilities/${county.name.toLowerCase()}.json`,
+      `./dataset/county_facilities/${county.name.toLowerCase()}.json`,
       JSON.stringify(facilities),
       err => {
         if (err) {
